@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>552</width>
-    <height>471</height>
+    <width>551</width>
+    <height>501</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,10 +23,12 @@
 	
 }
 QPushButton {
-	
-	font: 12pt;
+	color: rgba(0, 0, 0, 200);
+	font: 75 14pt &quot;DejaVu Sans&quot;;
 	border: 3px solid #DAA520;
 	border-radius: 11px;
+	background-color: rgb(154, 254, 214);
+
 }
 
 QLabel {
@@ -35,22 +37,29 @@ QLabel {
 	border: 5px solid #DAA520;
 	border-top-right-radius:70px;
 	border-top-left-radius:70px;
-}</string>
+
+}
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QFrame" name="frame_2">
+   <widget class="QFrame" name="frSinais">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
       <width>551</width>
-      <height>471</height>
+      <height>501</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(89, 150, 177);
-border-top-right-radius:70px;
-border-top-left-radius:70px;</string>
+     <string notr="true">#frSinais {
+	background-color: rgb(89, 150, 177);
+	border-top-right-radius:70px;
+	border-top-left-radius:70px;
+	border-bottom-right-radius:70px;
+	border-bottom-left-radius:70px;
+}
+</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -58,45 +67,6 @@ border-top-left-radius:70px;</string>
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QPushButton" name="pb8">
-     <property name="geometry">
-      <rect>
-       <x>150</x>
-       <y>210</y>
-       <width>120</width>
-       <height>50</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>8</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pb6">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>270</y>
-       <width>120</width>
-       <height>50</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>6</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pb3">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>330</y>
-       <width>120</width>
-       <height>50</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>3</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="lbMostraConta">
      <property name="geometry">
       <rect>
@@ -111,40 +81,14 @@ border-top-left-radius:70px;</string>
        <pointsize>38</pointsize>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);</string>
+     </property>
      <property name="text">
       <string/>
      </property>
      <property name="margin">
       <number>0</number>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pb1">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>330</y>
-       <width>120</width>
-       <height>50</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>1</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pb9">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>210</y>
-       <width>120</width>
-       <height>50</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string>9</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pbFuncaoMutiplicacao">
@@ -160,19 +104,6 @@ border-top-left-radius:70px;</string>
       <string>X</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pb4">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>270</y>
-       <width>120</width>
-       <height>50</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>4</string>
-     </property>
-    </widget>
     <widget class="QPushButton" name="pbIgual">
      <property name="geometry">
       <rect>
@@ -181,6 +112,13 @@ border-top-left-radius:70px;</string>
        <width>250</width>
        <height>50</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#pbIgual {	
+	
+	
+	background-color: rgb(254, 121, 199);
+}</string>
      </property>
      <property name="text">
       <string>=</string>
@@ -223,53 +161,6 @@ border-top-left-radius:70px;</string>
      </property>
      <property name="text">
       <string>/</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pb5">
-     <property name="geometry">
-      <rect>
-       <x>150</x>
-       <y>270</y>
-       <width>120</width>
-       <height>50</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>5</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pb7">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>210</y>
-       <width>120</width>
-       <height>50</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton { Size: 20px 20px; }
-
-QPushButton:hover { 
- 
-background-color: rgb(89, 150, 177);
-}</string>
-     </property>
-     <property name="text">
-      <string>7</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pb2">
-     <property name="geometry">
-      <rect>
-       <x>150</x>
-       <y>330</y>
-       <width>120</width>
-       <height>50</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>2</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pbClear">
@@ -324,11 +215,121 @@ background-color: rgb(89, 150, 177);
       <string>+</string>
      </property>
     </widget>
+    <zorder>pbFuncaoPorcentagem</zorder>
+    <zorder>pbPonto</zorder>
+    <zorder>pbPositivoNegativo</zorder>
+    <zorder>pbFuncaoSubtracao</zorder>
+    <zorder>psFuncaoDivisao</zorder>
+    <zorder>pbFuncaoMutiplicacao</zorder>
+    <zorder>pbFuncaoSoma</zorder>
+    <zorder>lbMostraConta</zorder>
+    <zorder>pbIgual</zorder>
+    <zorder>pbClear</zorder>
+   </widget>
+   <widget class="QFrame" name="frNumeros">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>210</y>
+      <width>390</width>
+      <height>250</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+	background-color: #ffffff;
+}
+</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QPushButton" name="pb2">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>120</y>
+       <width>120</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>2</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pb1">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>120</y>
+       <width>120</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>1</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pb4">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>60</y>
+       <width>120</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>4</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pb6">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>60</y>
+       <width>120</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>6</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pb3">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>120</y>
+       <width>120</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>3</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pb5">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>60</y>
+       <width>120</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>5</string>
+     </property>
+    </widget>
     <widget class="QPushButton" name="pb0">
      <property name="geometry">
       <rect>
-       <x>150</x>
-       <y>390</y>
+       <x>130</x>
+       <y>180</y>
        <width>120</width>
        <height>50</height>
       </rect>
@@ -337,26 +338,89 @@ background-color: rgb(89, 150, 177);
       <string>0</string>
      </property>
     </widget>
-    <zorder>pbFuncaoPorcentagem</zorder>
-    <zorder>pb9</zorder>
-    <zorder>pbPonto</zorder>
-    <zorder>pb7</zorder>
-    <zorder>pbPositivoNegativo</zorder>
-    <zorder>pb2</zorder>
-    <zorder>pbFuncaoSubtracao</zorder>
-    <zorder>psFuncaoDivisao</zorder>
-    <zorder>pb4</zorder>
-    <zorder>pb8</zorder>
-    <zorder>pbFuncaoMutiplicacao</zorder>
-    <zorder>pbFuncaoSoma</zorder>
-    <zorder>lbMostraConta</zorder>
-    <zorder>pb1</zorder>
-    <zorder>pb0</zorder>
-    <zorder>pb6</zorder>
-    <zorder>pb5</zorder>
-    <zorder>pb3</zorder>
-    <zorder>pbIgual</zorder>
-    <zorder>pbClear</zorder>
+    <widget class="QPushButton" name="pb8">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>0</y>
+       <width>120</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>DejaVu Sans</family>
+       <pointsize>14</pointsize>
+       <weight>9</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>8</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pb7">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>120</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton { Size: 20px 20px; }
+
+QPushButton:hover { 
+ 
+background-color: rgb(89, 150, 177);
+}</string>
+     </property>
+     <property name="text">
+      <string>7</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pb9">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>0</y>
+       <width>120</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>9</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="lbContato">
+    <property name="geometry">
+     <rect>
+      <x>26</x>
+      <y>458</y>
+      <width>500</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#lbContato {
+	border: 2px dashed #ffffff;
+	color: #ffffff;
+	border-top-right-radius:0px;
+	border-top-left-radius:0px;
+	border-bottom-right-radius: 30px;
+	border-bottom-left-radius:30px;
+	
+}</string>
+    </property>
+    <property name="text">
+     <string>                                  renan.silva.soares.br@gmail.com</string>
+    </property>
    </widget>
   </widget>
  </widget>
