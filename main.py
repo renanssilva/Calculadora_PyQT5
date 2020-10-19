@@ -1,92 +1,103 @@
-import PyQt5.QtWidgets as qtw
+from layout import Ui_MainWindow
+from PyQt5 import QtWidgets, QtCore
 
 
-class MainWindow(qtw.QWidget):
+class Calc(QtWidgets.QMainWindow, Ui_MainWindow):
+
+    primeiroNumero = None
+    usandoSegundoNumero = False
+
     def __init__(self):
-        super().__init__()
-        self.setWindowTitle('Calculadora')
-        self.setLayout(qtw.QVBoxLayout())
-        self.keypad()
-        self.temp_nums = []
-        self.fin_nums = []
+        super(Calc, self).__init__()
+        self.setupUi(self)
 
+        # Removendo titulo da janela
+        # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+
+        # Background Transparente
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+
+        # Show Window
         self.show()
 
-    def keypad(self):
-        # Container
-        container = qtw.QWidget()
-        container.setLayout(qtw.QGridLayout())
+        # Conectando Botões Números (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+        self.pb0.clicked.connect(self.digitaNumero)
+        self.pb1.clicked.connect(self.digitaNumero)
+        self.pb2.clicked.connect(self.digitaNumero)
+        self.pb3.clicked.connect(self.digitaNumero)
+        self.pb4.clicked.connect(self.digitaNumero)
+        self.pb5.clicked.connect(self.digitaNumero)
+        self.pb6.clicked.connect(self.digitaNumero)
+        self.pb7.clicked.connect(self.digitaNumero)
+        self.pb8.clicked.connect(self.digitaNumero)
+        self.pb9.clicked.connect(self.digitaNumero)
 
-        # Botões
-        self.result_fild = qtw.QLineEdit()
-        result = qtw.QPushButton('Enter', clicked = self.func_result)
-        clear = qtw.QPushButton('Limpar', clicked = self.clear_calc)
-        pb_9 = qtw.QPushButton('9', clicked = lambda:self.num_press('9'))
-        pb_8 = qtw.QPushButton('8', clicked = lambda:self.num_press('8'))
-        pb_7 = qtw.QPushButton('7', clicked = lambda:self.num_press('7'))
-        pb_6 = qtw.QPushButton('6', clicked = lambda:self.num_press('6'))
-        pb_5 = qtw.QPushButton('5', clicked = lambda:self.num_press('5'))
-        pb_4 = qtw.QPushButton('4', clicked = lambda:self.num_press('4'))
-        pb_3 = qtw.QPushButton('3', clicked = lambda:self.num_press('3'))
-        pb_2 = qtw.QPushButton('2', clicked = lambda:self.num_press('2'))
-        pb_1 = qtw.QPushButton('1', clicked = lambda:self.num_press('1'))
-        pb_0 = qtw.QPushButton('0', clicked = lambda:self.num_press('0'))
-        pbSoma = qtw.QPushButton('+', clicked = lambda:self.func_press('+'))
-        pbSubtracao = qtw.QPushButton('-', clicked = lambda:self.func_press('-'))
-        pbMutiplicacao = qtw.QPushButton('*', clicked = lambda:self.func_press('*'))
-        pbDivisao = qtw.QPushButton('/', clicked = lambda:self.func_press('/'))
+        # Conectando Botão Ponto (.)
+        self.pbPonto.clicked.connect(self.digitaPonto)
 
-        # Adicionando os Botões ao Layout
-        container.layout().addWidget(self.result_fild, 0, 0, 1, 4)
+        # Conectando Botões +/- e Porcentagem (+/-, %)
+        self.pbPositivoNegativo.clicked.connect(self.operadoresUnarios)
+        self.pbFuncaoPorcentagem.clicked.connect(self.operadoresUnarios)
 
-        container.layout().addWidget(result, 1, 0,  1, 2)
-        container.layout().addWidget(clear, 1, 2, 1, 2)
-        container.layout().addWidget(pb_9, 2, 0)
-        container.layout().addWidget(pb_8, 2, 1)
-        container.layout().addWidget(pb_7, 2, 2)
-        container.layout().addWidget(pb_6, 3, 0)
-        container.layout().addWidget(pb_5, 3, 1)
-        container.layout().addWidget(pb_4, 3, 2)
-        container.layout().addWidget(pb_3, 4, 0)
-        container.layout().addWidget(pb_2, 4, 1)
-        container.layout().addWidget(pb_1, 4, 2)
-        container.layout().addWidget(pb_0, 5, 0, 1, 3)
-        container.layout().addWidget(pbSoma, 2, 3)
-        container.layout().addWidget(pbSubtracao, 3, 3)
-        container.layout().addWidget(pbMutiplicacao, 4, 3)
-        container.layout().addWidget(pbDivisao, 5, 3)
+        # Conectando Botões Operadores (+, -, *, /)
+        self.pbFuncaoSoma.clicked.connect(self.operadores)
+        self.pbFuncaoSubtracao.clicked.connect(self.operadores)
+        self.pbFuncaoDivisao.clicked.connect(self.operadores)
+        self.pbFuncaoMutiplicacao.clicked.connect(self.operadores)
 
-        self.layout().addWidget(container)
+        # Conectando Botão de Igualdade (=)
+        self.pbIgual.clicked.connect(self.digitaIgual)
 
-    def num_press(self, key_number):
-        self.temp_nums.append(key_number)
-        temp_string = ''.join(self.temp_nums)
-        if self.fin_nums:
-            self.result_fild.setText(''.join(self.fin_nums) + temp_string)
+        # Conectando Botão de Limpar  Display (C)
+        self.pbClear.clicked.connect(self.clear)
+
+        self.pbFuncaoSoma.setCheckable(True)
+        self.pbFuncaoSubtracao.setCheckable(True)
+        self.pbFuncaoDivisao.setCheckable(True)
+        self.pbFuncaoMutiplicacao.setCheckable(True)
+
+    def digitaNumero(self):
+        botao = self.sender()
+
+        if (self.pbFuncaoSoma.isChecked() or self.pbFuncaoSubtracao.isChecked() or
+                self.pbFuncaoSoma.isChecked() or self.pbFuncaoSubtracao.isChecked()) and (not self.usandoSegundoNumero):
+            novoLabel = format(float(botao.text()), '.15g')
+            self.usandoSegundoNumero = True
         else:
-            self.result_fild.setText(temp_string)
+            if '.' in self.lbMostraConta.text() and botao.text()== '0':
+                novoLabel = format(float(self.lbMostraConta.text() + botao.text()), '.15')
+            else:
+                novoLabel = format(float(self.lbMostraConta.text() + botao.text()), '.15g')
+        self.lbMostraConta.setText(str(novoLabel))
 
-    def func_press(self, operator):
-        temp_string = ''.join(self.temp_nums)
-        self.fin_nums.append(temp_string)
-        self.fin_nums.append(operator)
-        self.temp_nums = []
-        self.result_fild.setText(''.join(self.fin_nums))
+    def digitaPonto(self):
+        self.lbMostraConta.setText(self.lbMostraConta.text() + '.')
 
-    def func_result(self):
-        fin_string = ''.join(self.fin_nums) + ''.join(self.temp_nums)
-        result_string = eval(fin_string)
-        fin_string += '='
-        fin_string += str(result_string)
-        self.result_fild.setText(fin_string)
+    def operadoresUnarios(self):
+        botao = self.sender()
+        labelNumber = float(self.lbMostraConta.text())
 
-    def clear_calc(self):
-        self.result_fild.clear()
-        self.temp_nums = []
-        self.fin_nums = []
+        if botao.text() == '+/-':
+            labelNumber *= - 1
+        else: # botao.text() == '%'
+            labelNumber *= 0.01
+
+        novoLabel = format(labelNumber, '15g')
+        self.lbMostraConta.setText(novoLabel)
+
+    def operadores(self):
+        pass
+
+    def digitaIgual(self):
+        pass
+
+    def clear(self):
+        pass
 
 
-app = qtw.QApplication([])
-mw = MainWindow()
-app.setStyle(qtw.QStyleFactory.create('Fusion'))
-app.exec_()
+# Execute app
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    ui = Calc()
+    sys.exit(app.exec_())

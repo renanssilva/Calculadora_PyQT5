@@ -3,6 +3,10 @@ from PyQt5 import QtWidgets, QtCore
 
 
 class Calc(QtWidgets.QMainWindow, Ui_MainWindow):
+
+    primeiroNumero = None
+    usandoSegundoNumero = False
+
     def __init__(self):
         super(Calc, self).__init__()
         self.setupUi(self)
@@ -16,7 +20,7 @@ class Calc(QtWidgets.QMainWindow, Ui_MainWindow):
         # Show Window
         self.show()
 
-        # Conectando Botões
+        # Conectando Botões Números (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
         self.pb0.clicked.connect(self.digitaNumero)
         self.pb1.clicked.connect(self.digitaNumero)
         self.pb2.clicked.connect(self.digitaNumero)
@@ -28,9 +32,101 @@ class Calc(QtWidgets.QMainWindow, Ui_MainWindow):
         self.pb8.clicked.connect(self.digitaNumero)
         self.pb9.clicked.connect(self.digitaNumero)
 
+        # Conectando Botão Ponto (.)
+        self.pbPonto.clicked.connect(self.digitaPonto)
+
+        # Conectando Botões +/- e Porcentagem (+/-, %)
+        self.pbPositivoNegativo.clicked.connect(self.operadoresUnarios)
+        self.pbFuncaoPorcentagem.clicked.connect(self.operadoresUnarios)
+
+        # Conectando Botões Operadores (+, -, *, /)
+        self.pbFuncaoSoma.clicked.connect(self.operadores)
+        self.pbFuncaoSubtracao.clicked.connect(self.operadores)
+        self.pbFuncaoDivisao.clicked.connect(self.operadores)
+        self.pbFuncaoMutiplicacao.clicked.connect(self.operadores)
+
+        # Conectando Botão de Igualdade (=)
+        self.pbIgual.clicked.connect(self.digitaIgual)
+
+        # Conectando Botão de Limpar  Display (C)
+        self.pbClear.clicked.connect(self.clear)
+
+        self.pbFuncaoSoma.setCheckable(True)
+        self.pbFuncaoSubtracao.setCheckable(True)
+        self.pbFuncaoDivisao.setCheckable(True)
+        self.pbFuncaoMutiplicacao.setCheckable(True)
+
     def digitaNumero(self):
         botao = self.sender()
-        self.lbMostraConta.setText(botao.text())
+
+        if (self.pbFuncaoSoma.isChecked() or self.pbFuncaoSubtracao.isChecked() or
+                self.pbFuncaoDivisao.isChecked() or self.pbFuncaoMutiplicacao.isChecked()) and (not self.usandoSegundoNumero):
+            novoLabel = format(float(botao.text()), '.15g')
+            self.usandoSegundoNumero = True
+        else:
+            if ('.' in self.lbMostraConta.text()) and (botao.text() == '0'):
+                novoLabel = format(self.lbMostraConta.text() + botao.text(), '.15')
+            else:
+                novoLabel = format(float(self.lbMostraConta.text() + botao.text()), '.15g')
+        self.lbMostraConta.setText(str(novoLabel))
+
+    def digitaPonto(self):
+        self.lbMostraConta.setText(self.lbMostraConta.text() + '.')
+
+    def operadoresUnarios(self):
+        botao = self.sender()
+        labelNumber = float(self.lbMostraConta.text())
+
+        if botao.text() == '+/-':
+            labelNumber *= - 1
+        else: # botao.text() == '%'
+            labelNumber *= 0.01
+
+        novoLabel = format(labelNumber, '15g')
+        self.lbMostraConta.setText(novoLabel)
+
+    def operadores(self):
+        botao = self.sender()
+
+        self.primeiroNumero = float(self.lbMostraConta.text())
+
+        botao.setChecked(True)
+
+    def digitaIgual(self):
+        segundoNumero = float(self.lbMostraConta.text())
+
+        if self.pbFuncaoSoma.isChecked():
+            labelNumber = self.primeiroNumero + segundoNumero
+            novoLabel = format(labelNumber, '15g')
+            self.lbMostraConta.setText(novoLabel)
+            self.pbFuncaoSoma.setChecked(False)
+        elif self.pbFuncaoSubtracao.isChecked():
+            labelNumber = self.primeiroNumero - segundoNumero
+            novoLabel = format(labelNumber, '15g')
+            self.lbMostraConta.setText(novoLabel)
+            self.pbFuncaoSubtracao.setChecked(False)
+        elif self.pbFuncaoMutiplicacao.isChecked():
+            labelNumber = self.primeiroNumero * segundoNumero
+            novoLabel = format(labelNumber, '15g')
+            self.lbMostraConta.setText(novoLabel)
+            self.pbFuncaoMutiplicacao.setChecked(False)
+        elif self.pbFuncaoDivisao.isChecked():
+            labelNumber = self.primeiroNumero / segundoNumero
+            novoLabel = format(labelNumber, '15g')
+            self.lbMostraConta.setText(novoLabel)
+            self.pbFuncaoDivisao.setChecked(False)
+
+        self.usandoSegundoNumero = False
+
+    def clear(self):
+        self.pbFuncaoSoma.setChecked(False)
+        self.pbFuncaoSubtracao.setChecked(False)
+        self.pbFuncaoMutiplicacao.setChecked(False)
+        self.pbFuncaoDivisao.setChecked(False)
+
+        self.usandoSegundoNumero = False
+
+        self.lbMostraConta.setText('0')
 
 
 # Execute app
