@@ -33,11 +33,11 @@ class Calc(QtWidgets.QMainWindow, Ui_MainWindow):
         self.pb9.clicked.connect(self.digitaNumero)
 
         # ----Conectando Botão Ponto (.)
-        self.pbPonto.clicked.connect(self.digitaPonto)
+        self.pbPonto.clicked.connect(self.simbolos)
 
-        # ----Conectando Botões +/- e Porcentagem (+/-, %)
-        self.pbPositivoNegativo.clicked.connect(self.operadoresUnarios)
-        self.pbFuncaoPorcentagem.clicked.connect(self.operadoresUnarios)
+        # ----Conectando Botões +/- e Porcentagem (X², %)
+        self.pbQuadrado.clicked.connect(self.simbolos)
+        self.pbFuncaoPorcentagem.clicked.connect(self.simbolos)
 
         # Conectando Botões Operadores (+, -, *, /)
         self.pbFuncaoSoma.clicked.connect(self.operadores)
@@ -54,29 +54,46 @@ class Calc(QtWidgets.QMainWindow, Ui_MainWindow):
     def digitaNumero(self):
         botao = self.sender()
         conteudo = self.lbMostraConta.text()
-        print((conteudo))
         self.lbMostraConta.setText(conteudo + botao.text())
 
     def digitaPonto(self):
         pass
 
-    def operadoresUnarios(self):
-        pass
+    def simbolos(self):
+        conteudo = self.lbMostraConta.text()
+        if conteudo:
+            botao = self.sender()
+            if botao.text() == 'X²':
+                botao = '²'
+                print(botao)
+                self.lbMostraConta.setText(conteudo + botao)
+            elif botao.text() == '.':
+                self.lbMostraConta.setText(conteudo + botao.text())
+            else:  # botao.text() == '%'
+                conteudo = float(self.lbMostraConta.text())
+                conteudo *= 0.01
+                self.lbMostraConta.setText(str(conteudo))
 
     def operadores(self):
         botao = self.sender()
         conteudo = self.lbMostraConta.text()
-        self.lbMostraConta.setText(conteudo + botao.text())
-
+        if conteudo:
+            self.lbMostraConta.setText(conteudo + botao.text())
+        if botao.text() == '-':
+            self.lbMostraConta.setText(conteudo + botao.text())
 
     def digitaIgual(self):
         conteudo = self.lbMostraConta.text()
-        if 'X' in conteudo:
-            conteudo = conteudo.replace('X', '*')
-            print(conteudo)
-        igual = float(eval(conteudo))
-        self.lbMostraConta.setText(f'{igual:.2f}')
-        #self.lbMostraConta.setText(f'{igual:.3e}')
+        if conteudo:
+            if 'X' in conteudo:
+                conteudo = conteudo.replace('X', '*')
+                print(conteudo)
+            if '²' in conteudo:
+                # O back-end entendera que X² como dois elementos
+                conteudo = conteudo.replace('²', '**2')
+                print(conteudo)
+            igual = float(eval(conteudo))
+            self.lbMostraConta.setText(f'{igual:.2f}')
 
     def clear(self):
         self.lbMostraConta.setText('')
