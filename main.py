@@ -32,10 +32,10 @@ class Calc(QtWidgets.QMainWindow, Ui_MainWindow):
         self.pb8.clicked.connect(self.digitaNumero)
         self.pb9.clicked.connect(self.digitaNumero)
 
-        # Conectando Botão Ponto (.)
+        # ----Conectando Botão Ponto (.)
         self.pbPonto.clicked.connect(self.digitaPonto)
 
-        # Conectando Botões +/- e Porcentagem (+/-, %)
+        # ----Conectando Botões +/- e Porcentagem (+/-, %)
         self.pbPositivoNegativo.clicked.connect(self.operadoresUnarios)
         self.pbFuncaoPorcentagem.clicked.connect(self.operadoresUnarios)
 
@@ -51,48 +51,35 @@ class Calc(QtWidgets.QMainWindow, Ui_MainWindow):
         # Conectando Botão de Limpar  Display (C)
         self.pbClear.clicked.connect(self.clear)
 
-        self.pbFuncaoSoma.setCheckable(True)
-        self.pbFuncaoSubtracao.setCheckable(True)
-        self.pbFuncaoDivisao.setCheckable(True)
-        self.pbFuncaoMutiplicacao.setCheckable(True)
-
     def digitaNumero(self):
         botao = self.sender()
-
-        if (self.pbFuncaoSoma.isChecked() or self.pbFuncaoSubtracao.isChecked() or
-                self.pbFuncaoSoma.isChecked() or self.pbFuncaoSubtracao.isChecked()) and (not self.usandoSegundoNumero):
-            novoLabel = format(float(botao.text()), '.15g')
-            self.usandoSegundoNumero = True
-        else:
-            if '.' in self.lbMostraConta.text() and botao.text()== '0':
-                novoLabel = format(float(self.lbMostraConta.text() + botao.text()), '.15')
-            else:
-                novoLabel = format(float(self.lbMostraConta.text() + botao.text()), '.15g')
-        self.lbMostraConta.setText(str(novoLabel))
+        conteudo = self.lbMostraConta.text()
+        print((conteudo))
+        self.lbMostraConta.setText(conteudo + botao.text())
 
     def digitaPonto(self):
-        self.lbMostraConta.setText(self.lbMostraConta.text() + '.')
+        pass
 
     def operadoresUnarios(self):
-        botao = self.sender()
-        labelNumber = float(self.lbMostraConta.text())
-
-        if botao.text() == '+/-':
-            labelNumber *= - 1
-        else: # botao.text() == '%'
-            labelNumber *= 0.01
-
-        novoLabel = format(labelNumber, '15g')
-        self.lbMostraConta.setText(novoLabel)
+        pass
 
     def operadores(self):
-        pass
+        botao = self.sender()
+        conteudo = self.lbMostraConta.text()
+        self.lbMostraConta.setText(conteudo + botao.text())
+
 
     def digitaIgual(self):
-        pass
+        conteudo = self.lbMostraConta.text()
+        if 'X' in conteudo:
+            conteudo = conteudo.replace('X', '*')
+            print(conteudo)
+        igual = float(eval(conteudo))
+        self.lbMostraConta.setText(f'{igual:.2f}')
+        #self.lbMostraConta.setText(f'{igual:.3e}')
 
     def clear(self):
-        pass
+        self.lbMostraConta.setText('')
 
 
 # Execute app

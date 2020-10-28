@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(551, 500)
+        MainWindow.resize(645, 565)
         MainWindow.setStyleSheet("QWidget {\n"
 "    background-color: rgba(255, 255, 255,0);\n"
 "}\n"
@@ -27,10 +27,13 @@ class Ui_MainWindow(object):
 "    background-color: rgb(154, 254, 214);\n"
 "}\n"
 "\n"
-"QPushButton:hover {\n"
-"    background:#DAA520;\n"
+"#pb0, #pb1, #pb2, #pb3, #pb4, #pb5, #pb6, #pb7, #pb8, #pb9 {\n"
+"    background-color: #FCFCFC;\n"
 "}\n"
 "\n"
+"#pbIgual {    \n"
+"    background-color: rgb(254, 121, 199);\n"
+"}\n"
 "\n"
 "QLabel {\n"
 "    \n"
@@ -43,7 +46,76 @@ class Ui_MainWindow(object):
 "")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.pb8 = QtWidgets.QPushButton(self.centralwidget)
+        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout.setObjectName("gridLayout")
+        self.frSinais = QtWidgets.QFrame(self.centralwidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frSinais.sizePolicy().hasHeightForWidth())
+        self.frSinais.setSizePolicy(sizePolicy)
+        self.frSinais.setMinimumSize(QtCore.QSize(551, 501))
+        self.frSinais.setStyleSheet("#frSinais {\n"
+"    background-color: rgb(89, 150, 177);\n"
+"    border-top-right-radius:70px;\n"
+"    border-top-left-radius:70px;\n"
+"    border-bottom-right-radius:70px;\n"
+"    border-bottom-left-radius:70px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background:#DAA520;\n"
+"}\n"
+"")
+        self.frSinais.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frSinais.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frSinais.setObjectName("frSinais")
+        self.pbIgual = QtWidgets.QPushButton(self.frSinais)
+        self.pbIgual.setGeometry(QtCore.QRect(280, 390, 250, 50))
+        self.pbIgual.setStyleSheet("")
+        self.pbIgual.setObjectName("pbIgual")
+        self.pb1 = QtWidgets.QPushButton(self.frSinais)
+        self.pb1.setGeometry(QtCore.QRect(20, 330, 120, 50))
+        self.pb1.setObjectName("pb1")
+        self.pbFuncaoSubtracao = QtWidgets.QPushButton(self.frSinais)
+        self.pbFuncaoSubtracao.setGeometry(QtCore.QRect(410, 270, 120, 50))
+        self.pbFuncaoSubtracao.setObjectName("pbFuncaoSubtracao")
+        self.pb4 = QtWidgets.QPushButton(self.frSinais)
+        self.pb4.setGeometry(QtCore.QRect(20, 270, 120, 50))
+        self.pb4.setObjectName("pb4")
+        self.pb5 = QtWidgets.QPushButton(self.frSinais)
+        self.pb5.setGeometry(QtCore.QRect(150, 270, 120, 50))
+        self.pb5.setObjectName("pb5")
+        self.pbFuncaoDivisao = QtWidgets.QPushButton(self.frSinais)
+        self.pbFuncaoDivisao.setGeometry(QtCore.QRect(410, 210, 120, 50))
+        self.pbFuncaoDivisao.setObjectName("pbFuncaoDivisao")
+        self.pbFuncaoSoma = QtWidgets.QPushButton(self.frSinais)
+        self.pbFuncaoSoma.setGeometry(QtCore.QRect(410, 330, 120, 50))
+        self.pbFuncaoSoma.setObjectName("pbFuncaoSoma")
+        self.pbClear = QtWidgets.QPushButton(self.frSinais)
+        self.pbClear.setGeometry(QtCore.QRect(20, 150, 120, 50))
+        self.pbClear.setObjectName("pbClear")
+        self.pb7 = QtWidgets.QPushButton(self.frSinais)
+        self.pb7.setGeometry(QtCore.QRect(20, 210, 120, 50))
+        self.pb7.setStyleSheet("")
+        self.pb7.setObjectName("pb7")
+        self.pbPositivoNegativo = QtWidgets.QPushButton(self.frSinais)
+        self.pbPositivoNegativo.setGeometry(QtCore.QRect(150, 150, 120, 50))
+        self.pbPositivoNegativo.setObjectName("pbPositivoNegativo")
+        self.pb9 = QtWidgets.QPushButton(self.frSinais)
+        self.pb9.setGeometry(QtCore.QRect(280, 210, 120, 50))
+        self.pb9.setStyleSheet("")
+        self.pb9.setObjectName("pb9")
+        self.pbFuncaoMutiplicacao = QtWidgets.QPushButton(self.frSinais)
+        self.pbFuncaoMutiplicacao.setGeometry(QtCore.QRect(410, 150, 120, 50))
+        self.pbFuncaoMutiplicacao.setObjectName("pbFuncaoMutiplicacao")
+        self.pbPonto = QtWidgets.QPushButton(self.frSinais)
+        self.pbPonto.setGeometry(QtCore.QRect(20, 390, 120, 50))
+        self.pbPonto.setObjectName("pbPonto")
+        self.pb2 = QtWidgets.QPushButton(self.frSinais)
+        self.pb2.setGeometry(QtCore.QRect(150, 330, 120, 50))
+        self.pb2.setObjectName("pb2")
+        self.pb8 = QtWidgets.QPushButton(self.frSinais)
         self.pb8.setGeometry(QtCore.QRect(150, 210, 120, 50))
         font = QtGui.QFont()
         font.setFamily("DejaVu Sans")
@@ -53,24 +125,22 @@ class Ui_MainWindow(object):
         font.setWeight(9)
         self.pb8.setFont(font)
         self.pb8.setObjectName("pb8")
-        self.pb1 = QtWidgets.QPushButton(self.centralwidget)
-        self.pb1.setGeometry(QtCore.QRect(20, 330, 120, 50))
-        self.pb1.setObjectName("pb1")
-        self.pbFuncaoPorcentagem = QtWidgets.QPushButton(self.centralwidget)
-        self.pbFuncaoPorcentagem.setGeometry(QtCore.QRect(280, 150, 120, 50))
-        self.pbFuncaoPorcentagem.setObjectName("pbFuncaoPorcentagem")
-        self.lbMostraConta = QtWidgets.QLabel(self.centralwidget)
+        self.lbMostraConta = QtWidgets.QLabel(self.frSinais)
         self.lbMostraConta.setGeometry(QtCore.QRect(20, 20, 510, 120))
         font = QtGui.QFont()
         font.setPointSize(38)
         self.lbMostraConta.setFont(font)
         self.lbMostraConta.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.lbMostraConta.setText("")
+        self.lbMostraConta.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.lbMostraConta.setObjectName("lbMostraConta")
-        self.pbClear = QtWidgets.QPushButton(self.centralwidget)
-        self.pbClear.setGeometry(QtCore.QRect(20, 150, 120, 50))
-        self.pbClear.setObjectName("pbClear")
-        self.lbContato = QtWidgets.QLabel(self.centralwidget)
+        self.pbFuncaoPorcentagem = QtWidgets.QPushButton(self.frSinais)
+        self.pbFuncaoPorcentagem.setGeometry(QtCore.QRect(280, 150, 120, 50))
+        self.pbFuncaoPorcentagem.setObjectName("pbFuncaoPorcentagem")
+        self.pb3 = QtWidgets.QPushButton(self.frSinais)
+        self.pb3.setGeometry(QtCore.QRect(280, 330, 120, 50))
+        self.pb3.setObjectName("pb3")
+        self.lbContato = QtWidgets.QLabel(self.frSinais)
         self.lbContato.setGeometry(QtCore.QRect(26, 458, 500, 31))
         self.lbContato.setStyleSheet("#lbContato {\n"
 "    border: 2px dashed #ffffff;\n"
@@ -82,97 +152,14 @@ class Ui_MainWindow(object):
 "    \n"
 "}")
         self.lbContato.setObjectName("lbContato")
-        self.pbFuncaoDivisao = QtWidgets.QPushButton(self.centralwidget)
-        self.pbFuncaoDivisao.setGeometry(QtCore.QRect(410, 210, 120, 50))
-        self.pbFuncaoDivisao.setObjectName("pbFuncaoDivisao")
-        self.pbPositivoNegativo = QtWidgets.QPushButton(self.centralwidget)
-        self.pbPositivoNegativo.setGeometry(QtCore.QRect(150, 150, 120, 50))
-        self.pbPositivoNegativo.setObjectName("pbPositivoNegativo")
-        self.pbFuncaoMutiplicacao = QtWidgets.QPushButton(self.centralwidget)
-        self.pbFuncaoMutiplicacao.setGeometry(QtCore.QRect(410, 150, 120, 50))
-        self.pbFuncaoMutiplicacao.setObjectName("pbFuncaoMutiplicacao")
-        self.pb4 = QtWidgets.QPushButton(self.centralwidget)
-        self.pb4.setGeometry(QtCore.QRect(20, 270, 120, 50))
-        self.pb4.setObjectName("pb4")
-        self.pbFuncaoSubtracao = QtWidgets.QPushButton(self.centralwidget)
-        self.pbFuncaoSubtracao.setGeometry(QtCore.QRect(410, 270, 120, 50))
-        self.pbFuncaoSubtracao.setObjectName("pbFuncaoSubtracao")
-        self.pbIgual = QtWidgets.QPushButton(self.centralwidget)
-        self.pbIgual.setGeometry(QtCore.QRect(280, 390, 250, 50))
-        self.pbIgual.setStyleSheet("#pbIgual {    \n"
-"    \n"
-"    \n"
-"    background-color: rgb(254, 121, 199);\n"
-"}")
-        self.pbIgual.setObjectName("pbIgual")
-        self.pb6 = QtWidgets.QPushButton(self.centralwidget)
+        self.pb6 = QtWidgets.QPushButton(self.frSinais)
         self.pb6.setGeometry(QtCore.QRect(280, 270, 120, 50))
         self.pb6.setObjectName("pb6")
-        self.pb5 = QtWidgets.QPushButton(self.centralwidget)
-        self.pb5.setGeometry(QtCore.QRect(150, 270, 120, 50))
-        self.pb5.setObjectName("pb5")
-        self.pb3 = QtWidgets.QPushButton(self.centralwidget)
-        self.pb3.setGeometry(QtCore.QRect(280, 330, 120, 50))
-        self.pb3.setObjectName("pb3")
-        self.pb7 = QtWidgets.QPushButton(self.centralwidget)
-        self.pb7.setGeometry(QtCore.QRect(20, 210, 120, 50))
-        self.pb7.setStyleSheet("")
-        self.pb7.setObjectName("pb7")
-        self.pbPonto = QtWidgets.QPushButton(self.centralwidget)
-        self.pbPonto.setGeometry(QtCore.QRect(20, 390, 120, 50))
-        self.pbPonto.setObjectName("pbPonto")
-        self.pb2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pb2.setGeometry(QtCore.QRect(150, 330, 120, 50))
-        self.pb2.setObjectName("pb2")
-        self.frSinais = QtWidgets.QFrame(self.centralwidget)
-        self.frSinais.setGeometry(QtCore.QRect(0, 0, 551, 501))
-        self.frSinais.setStyleSheet("#frSinais {\n"
-"    background-color: rgb(89, 150, 177);\n"
-"    border-top-right-radius:70px;\n"
-"    border-top-left-radius:70px;\n"
-"    border-bottom-right-radius:70px;\n"
-"    border-bottom-left-radius:70px;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: rgb(255, 255, 255);\n"
-"}")
-        self.frSinais.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frSinais.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frSinais.setObjectName("frSinais")
-        self.pb0 = QtWidgets.QPushButton(self.centralwidget)
+        self.pb0 = QtWidgets.QPushButton(self.frSinais)
         self.pb0.setGeometry(QtCore.QRect(150, 390, 120, 50))
         self.pb0.setStyleSheet("")
         self.pb0.setObjectName("pb0")
-        self.pbFuncaoSoma = QtWidgets.QPushButton(self.centralwidget)
-        self.pbFuncaoSoma.setGeometry(QtCore.QRect(410, 330, 120, 50))
-        self.pbFuncaoSoma.setObjectName("pbFuncaoSoma")
-        self.pb9 = QtWidgets.QPushButton(self.centralwidget)
-        self.pb9.setGeometry(QtCore.QRect(280, 210, 120, 50))
-        self.pb9.setStyleSheet("")
-        self.pb9.setObjectName("pb9")
-        self.frSinais.raise_()
-        self.pb8.raise_()
-        self.pb1.raise_()
-        self.pbFuncaoPorcentagem.raise_()
-        self.lbMostraConta.raise_()
-        self.pbClear.raise_()
-        self.lbContato.raise_()
-        self.pbFuncaoDivisao.raise_()
-        self.pbPositivoNegativo.raise_()
-        self.pbFuncaoMutiplicacao.raise_()
-        self.pb4.raise_()
-        self.pbFuncaoSubtracao.raise_()
-        self.pbIgual.raise_()
-        self.pb6.raise_()
-        self.pb5.raise_()
-        self.pb3.raise_()
-        self.pb7.raise_()
-        self.pbPonto.raise_()
-        self.pb2.raise_()
-        self.pb0.raise_()
-        self.pbFuncaoSoma.raise_()
-        self.pb9.raise_()
+        self.gridLayout.addWidget(self.frSinais, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -181,26 +168,26 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pb8.setText(_translate("MainWindow", "8"))
-        self.pb1.setText(_translate("MainWindow", "1"))
-        self.pbFuncaoPorcentagem.setText(_translate("MainWindow", "%"))
-        self.pbClear.setText(_translate("MainWindow", "C"))
-        self.lbContato.setText(_translate("MainWindow", "                                  renan.silva.soares.br@gmail.com"))
-        self.pbFuncaoDivisao.setText(_translate("MainWindow", "/"))
-        self.pbPositivoNegativo.setText(_translate("MainWindow", "+/-"))
-        self.pbFuncaoMutiplicacao.setText(_translate("MainWindow", "X"))
-        self.pb4.setText(_translate("MainWindow", "4"))
-        self.pbFuncaoSubtracao.setText(_translate("MainWindow", "-"))
         self.pbIgual.setText(_translate("MainWindow", "="))
-        self.pb6.setText(_translate("MainWindow", "6"))
+        self.pb1.setText(_translate("MainWindow", "1"))
+        self.pbFuncaoSubtracao.setText(_translate("MainWindow", "-"))
+        self.pb4.setText(_translate("MainWindow", "4"))
         self.pb5.setText(_translate("MainWindow", "5"))
-        self.pb3.setText(_translate("MainWindow", "3"))
+        self.pbFuncaoDivisao.setText(_translate("MainWindow", "/"))
+        self.pbFuncaoSoma.setText(_translate("MainWindow", "+"))
+        self.pbClear.setText(_translate("MainWindow", "C"))
         self.pb7.setText(_translate("MainWindow", "7"))
+        self.pbPositivoNegativo.setText(_translate("MainWindow", "+/-"))
+        self.pb9.setText(_translate("MainWindow", "9"))
+        self.pbFuncaoMutiplicacao.setText(_translate("MainWindow", "X"))
         self.pbPonto.setText(_translate("MainWindow", "."))
         self.pb2.setText(_translate("MainWindow", "2"))
+        self.pb8.setText(_translate("MainWindow", "8"))
+        self.pbFuncaoPorcentagem.setText(_translate("MainWindow", "%"))
+        self.pb3.setText(_translate("MainWindow", "3"))
+        self.lbContato.setText(_translate("MainWindow", "                                  renan.silva.soares.br@gmail.com"))
+        self.pb6.setText(_translate("MainWindow", "6"))
         self.pb0.setText(_translate("MainWindow", "0"))
-        self.pbFuncaoSoma.setText(_translate("MainWindow", "+"))
-        self.pb9.setText(_translate("MainWindow", "9"))
 
 
 if __name__ == "__main__":
