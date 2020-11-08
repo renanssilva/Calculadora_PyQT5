@@ -4,8 +4,7 @@ from PyQt5 import QtWidgets, QtCore
 
 class Calc(QtWidgets.QMainWindow, Ui_MainWindow):
 
-    primeiroNumero = None
-    usandoSegundoNumero = False
+    Ponto = []
 
     def __init__(self):
         super(Calc, self).__init__()
@@ -56,23 +55,19 @@ class Calc(QtWidgets.QMainWindow, Ui_MainWindow):
         conteudo = self.lbMostraConta.text()
         self.lbMostraConta.setText(conteudo + botao.text())
 
-    def digitaPonto(self):
-        pass
-
     def simbolos(self):
         conteudo = self.lbMostraConta.text()
         if conteudo:
             botao = self.sender()
             if botao.text() == 'X²':
                 botao = '²'
-                print(botao)
                 self.lbMostraConta.setText(conteudo + botao)
             elif botao.text() == '.':
-                self.lbMostraConta.setText(conteudo + botao.text())
+                if not self.Ponto:
+                    self.lbMostraConta.setText(conteudo + botao.text())
+                    self.Ponto.append('.')
             else:  # botao.text() == '%'
-                conteudo = float(self.lbMostraConta.text())
-                conteudo *= 0.01
-                self.lbMostraConta.setText(str(conteudo))
+                self.lbMostraConta.setText(conteudo + botao.text())
 
     def operadores(self):
         botao = self.sender()
@@ -81,22 +76,29 @@ class Calc(QtWidgets.QMainWindow, Ui_MainWindow):
             self.lbMostraConta.setText(conteudo + botao.text())
         if botao.text() == '-':
             self.lbMostraConta.setText(conteudo + botao.text())
+        self.verificaPonto(botao)
 
     def digitaIgual(self):
         conteudo = self.lbMostraConta.text()
-        if conteudo:
+        if len(conteudo) >= 2 and conteudo[-1] not in ['+', '-', 'X', '/', '.' ]:
             if 'X' in conteudo:
                 conteudo = conteudo.replace('X', '*')
-                print(conteudo)
             if '²' in conteudo:
                 # O back-end entendera que X² como dois elementos
                 conteudo = conteudo.replace('²', '**2')
-                print(conteudo)
+            if '%' in conteudo:
+                conteudo = conteudo.replace('%', '*0.01')
             igual = float(eval(conteudo))
             self.lbMostraConta.setText(f'{igual:.2f}')
+            self.verificaPonto(self.sender())
 
     def clear(self):
         self.lbMostraConta.setText('')
+        self.verificaPonto(self.sender())
+
+    def verificaPonto(self, botao):
+        if botao != '.' and len(self.Ponto) == 1:
+            self.Ponto.clear()
 
 
 # Execute app
